@@ -76,6 +76,7 @@ struct ContentView: View {
                             }
                         }
                         .padding()
+                        .navigationTitle("Add Subscription")
                         .navigationBarItems(leading: Button("Close") {
                             callerCategory = nil
                         }, trailing: Button("Add") {
@@ -107,6 +108,7 @@ struct ContentView: View {
                         Spacer()
                     }
                     .padding()
+                    .navigationTitle("Add Category")
                     .navigationBarItems(leading: Button("Close") {
                         addCategoryIsPresented = false
                     }, trailing: Button("Add") {
