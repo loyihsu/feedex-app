@@ -21,7 +21,14 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<SubscriptionItem>
 
-    @State var callerCategory: Wrapped<String>? = nil
+    @State var callerCategory: Wrapped<SubscriptionCategory?>? = nil
+    @State var addCategoryIsPresented = false
+
+    @State var addUrl: String = ""
+    @State var addItemName: String = ""
+    @State var urlStep2: Bool = false
+
+    @State var newCategoryName = ""
 
     var body: some View {
         NavigationView {
@@ -36,8 +43,7 @@ struct ContentView: View {
                             Button("\(item.name!)") { }
                         }
                         Button(action: {
-                            callerCategory = Wrapped<String>(category.name!)
-//                            addSubscriptionItem(name: "New Item in \(category.name!)", url: "Some URL", category: category.self)
+                            callerCategory = Wrapped(category.self)
                         }, label: {
                             Text("Add New Item")
                                 .foregroundColor(.secondary)
@@ -49,29 +55,64 @@ struct ContentView: View {
                     Button("\(item.name!)") { }
                 }
                 Button(action: {
-                    callerCategory = Wrapped<String>("")
-//                    addSubscriptionItem(name: "New Item with no category", url: "Some url")
+                    callerCategory = Wrapped<SubscriptionCategory?>(nil)
                 }) {
                     Text("Add new item")
                         .foregroundColor(.secondary)
                 }
-                .sheet(item: $callerCategory) { wrapped in
+                .sheet(item: $callerCategory) { wrappedCategory in
                     NavigationView {
-                        Text("Hello World \(wrapped.item)")
+                        VStack(spacing: 12) {
+                            TextField("URL", text: $addUrl)
+                            if !urlStep2 {
+                                Button("Search") {
+                                    urlStep2 = true
+                                }
+                            }
+                            if urlStep2 {
+                                TextField("Name", text: $addItemName)
+                            }
+                        }
+                        .padding()
+                        .navigationBarItems(leading: Button("Close") {
+                            callerCategory = nil
+                        }, trailing: Button("Add") {
+                            addSubscriptionItem(name: addItemName,
+                                                url: addUrl,
+                                                category: wrappedCategory.item)
+                            urlStep2 = false
+                            callerCategory = nil
+                            addItemName = ""
+                            addUrl = ""
+                        }.disabled(!urlStep2))
                     }
-                    .navigationBarItems(leading: Button("Close") { callerCategory = nil })
                 }
             }
             .toolbar {
                 ToolbarItem {
                     Button(action: {
-                        addCategory(name: "New Category \(categories.count)")
+                        addCategoryIsPresented = true
                     }) {
                         Label("Add Category", systemImage: "plus")
                     }
                 }
             }
             .navigationTitle("Feedex")
+            .sheet(isPresented: $addCategoryIsPresented) {
+                NavigationView {
+                    VStack {
+                        TextField("Category Name", text: $newCategoryName)
+                    }
+                    .padding()
+                    .navigationBarItems(leading: Button("Close") {
+                        addCategoryIsPresented = false
+                    }, trailing: Button("Add") {
+                        addCategory(name: newCategoryName)
+                        newCategoryName = ""
+                        addCategoryIsPresented = false
+                    })
+                }
+            }
         }
     }
 
