@@ -57,20 +57,22 @@ struct ContentView: View {
                 Button(action: {
                     callerCategory = Wrapped<SubscriptionCategory?>(nil)
                 }) {
-                    Text("Add new item")
+                    Text("Add New item")
                         .foregroundColor(.secondary)
                 }
                 .sheet(item: $callerCategory) { wrappedCategory in
                     NavigationView {
-                        VStack(spacing: 12) {
+                        VStack(spacing: 24) {
                             TextField("URL", text: $addUrl)
                             if !urlStep2 {
                                 Button("Search") {
                                     urlStep2 = true
                                 }
+                                Spacer()
                             }
                             if urlStep2 {
                                 TextField("Name", text: $addItemName)
+                                Spacer()
                             }
                         }
                         .padding()
@@ -102,6 +104,7 @@ struct ContentView: View {
                 NavigationView {
                     VStack {
                         TextField("Category Name", text: $newCategoryName)
+                        Spacer()
                     }
                     .padding()
                     .navigationBarItems(leading: Button("Close") {
