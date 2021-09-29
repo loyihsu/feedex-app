@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="SubscriptionCategory" representedClassName="SubscriptionCategory" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="items" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubscriptionItem" inverseName="category" inverseEntity="SubscriptionItem"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SubscriptionItem" inverseName="category" inverseEntity="SubscriptionItem"/>
     </entity>
     <entity name="SubscriptionItem" representedClassName="SubscriptionItem" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
