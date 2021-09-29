@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF4C69C92704ECA1009AE4D7 /* GenericWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4C69C82704ECA1009AE4D7 /* GenericWrapper.swift */; };
 		FFDCD42D2704C28700E02934 /* Feedex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFDCD41A2704C28600E02934 /* Feedex.xcdatamodeld */; };
 		FFDCD42E2704C28700E02934 /* Feedex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFDCD41A2704C28600E02934 /* Feedex.xcdatamodeld */; };
 		FFDCD42F2704C28700E02934 /* FeedexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCD41C2704C28600E02934 /* FeedexApp.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF4C69C82704ECA1009AE4D7 /* GenericWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericWrapper.swift; sourceTree = "<group>"; };
 		FFDCD41B2704C28600E02934 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		FFDCD41C2704C28600E02934 /* FeedexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedexApp.swift; sourceTree = "<group>"; };
 		FFDCD41D2704C28600E02934 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF4C69C62704EC69009AE4D7 /* Datatype */ = {
+			isa = PBXGroup;
+			children = (
+				FF4C69C82704ECA1009AE4D7 /* GenericWrapper.swift */,
+			);
+			path = Datatype;
+			sourceTree = "<group>";
+		};
 		FFDCD4142704C28500E02934 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +70,7 @@
 		FFDCD4192704C28600E02934 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				FF4C69C62704EC69009AE4D7 /* Datatype */,
 				FFDCD41C2704C28600E02934 /* FeedexApp.swift */,
 				FFDCD41D2704C28600E02934 /* ContentView.swift */,
 				FFDCD41E2704C28600E02934 /* Persistence.swift */,
@@ -185,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFDCD42F2704C28700E02934 /* FeedexApp.swift in Sources */,
+				FF4C69C92704ECA1009AE4D7 /* GenericWrapper.swift in Sources */,
 				FFDCD4332704C28700E02934 /* Persistence.swift in Sources */,
 				FFDCD42D2704C28700E02934 /* Feedex.xcdatamodeld in Sources */,
 				FFDCD4312704C28700E02934 /* ContentView.swift in Sources */,

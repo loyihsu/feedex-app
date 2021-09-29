@@ -21,6 +21,7 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<SubscriptionItem>
 
+    @State var callerCategory: Wrapped<String>? = nil
 
     var body: some View {
         NavigationView {
@@ -35,7 +36,8 @@ struct ContentView: View {
                             Button("\(item.name!)") { }
                         }
                         Button(action: {
-                            addSubscriptionItem(name: "New Item in \(category.name!)", url: "Some URL", category: category.self)
+                            callerCategory = Wrapped<String>(category.name!)
+//                            addSubscriptionItem(name: "New Item in \(category.name!)", url: "Some URL", category: category.self)
                         }, label: {
                             Text("Add New Item")
                                 .foregroundColor(.secondary)
@@ -47,10 +49,17 @@ struct ContentView: View {
                     Button("\(item.name!)") { }
                 }
                 Button(action: {
-                    addSubscriptionItem(name: "New Item with no category", url: "Some url")
+                    callerCategory = Wrapped<String>("")
+//                    addSubscriptionItem(name: "New Item with no category", url: "Some url")
                 }) {
                     Text("Add new item")
                         .foregroundColor(.secondary)
+                }
+                .sheet(item: $callerCategory) { wrapped in
+                    NavigationView {
+                        Text("Hello World \(wrapped.item)")
+                    }
+                    .navigationBarItems(leading: Button("Close") { callerCategory = nil })
                 }
             }
             .toolbar {
