@@ -108,7 +108,11 @@ struct ContentView: View {
                             TextField("URL", text: $addUrl)
                             if !urlStep2 {
                                 Button("Search") {
-                                    urlStep2 = true
+                                    if let document = checkAndFetchXML(addUrl),
+                                       let title = try? document.title() {
+                                        addItemName = title
+                                        urlStep2 = true
+                                    }
                                 }
                                 Spacer()
                             }
