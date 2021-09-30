@@ -10,23 +10,39 @@ import CoreData
 struct PersistenceController {
     static let shared = PersistenceController()
 
-//    static var preview: PersistenceController = {
-//        let result = PersistenceController(inMemory: true)
-//        let viewContext = result.container.viewContext
-//        for _ in 0..<10 {
-//            let newItem = SubscriptionItem(context: viewContext)
-//
-//        }
-//        do {
-//            try viewContext.save()
-//        } catch {
-//            // Replace this implementation with code to handle the error appropriately.
-//            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//            let nsError = error as NSError
-//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//        }
-//        return result
-//    }()
+    static var preview: PersistenceController = {
+        let result = PersistenceController(inMemory: true)
+        let viewContext = result.container.viewContext
+        var categories = [SubscriptionCategory]()
+
+        for idx in 1...2 {
+            let newCategory = SubscriptionCategory(context: viewContext)
+            newCategory.name = "Sample Category \(idx)"
+            categories.append(newCategory)
+        }
+
+        for category in categories {
+            let item1 = SubscriptionItem(context: viewContext)
+            item1.name = "Google"
+            item1.url = "https://www.google.com"
+            item1.category = category
+
+            let item2 = SubscriptionItem(context: viewContext)
+            item2.name = "Facebook"
+            item2.url = "https://www.facebook.com"
+            item2.category = category
+        }
+
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        return result
+    }()
 
     let container: NSPersistentCloudKitContainer
 
