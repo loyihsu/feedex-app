@@ -105,24 +105,27 @@ struct ContentView: View {
                 .sheet(item: $callerCategory) { wrappedCategory in
                     NavigationView {
                         VStack(spacing: 12) {
-                            if urlStep2 {
-                                TextField("Name", text: $addItemName)
-                                    .foregroundColor(.accentColor)
+                            VStack(alignment: .leading, spacing: 12) {
+                                if urlStep2 {
+                                    TextField("Name", text: $addItemName)
+                                        .foregroundColor(.accentColor)
+                                }
+                                if urlStep2 {
+                                    Text(addUrl).foregroundColor(.secondary)
+                                } else {
+                                    TextField("URL", text: $addUrl)
+                                        .foregroundColor(.secondary)
+                                        .textContentType(.URL)
+                                        .keyboardType(.URL)
+                                }
                             }
-                            TextField("URL", text: $addUrl)
-                                .foregroundColor(.secondary)
-                                // .disabled(urlStep2)         //TODO: This is causing runtime issue as it modifies state during view update.
                             if !urlStep2 {
                                 Button("Search") {
+                                    UIApplication.shared.resignFirstResponder()
                                     if let document = checkAndFetchXML(addUrl),
                                        let title = try? document.title() {
                                         addItemName = title
-                                        DispatchQueue.main.async {
-                                            #if os(iOS)
-                                            UIApplication.shared.resignFirstResponder()
-                                            #endif
-                                            urlStep2 = true
-                                        }
+                                        urlStep2 = true
                                     }
                                 }
                             }
