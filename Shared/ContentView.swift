@@ -33,15 +33,39 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                Button("All Items") {
+                Section {
+                    Button("All Items") {
 
+                    }
                 }
+
 
                 ForEach(categories) { category in
                     Section(category.name ?? "") {
-                        ForEach(items.filter({ $0.category == category })) { item in
-                            Button("\(item.name!)") { }
+                        if items.contains(where: { $0.category == category}) {
+                            Button("All items") { }
                         }
+                        ForEach(items.filter({ $0.category == category })) { item in
+                            Button(action: {
+
+                            }) {
+                                VStack(alignment: .leading) {
+                                    if item.name! != item.url! {
+                                        Text("\(item.name!)")
+                                        Text("\(item.url!)")
+                                            .foregroundColor(.secondary)
+                                            .font(.caption)
+                                    } else {
+                                        Text("\(item.url!)")
+                                    }
+                                }
+                            }
+                        }
+                        .onDelete { offsets in
+                            let list = items.filter({ $0.category == category })
+                            deleteSubscriptionItems(offsets: offsets, list: list)
+                        }
+
                         Button(action: {
                             callerCategory = Wrapped(category.self)
                         }, label: {
@@ -52,8 +76,26 @@ struct ContentView: View {
                 }
 
                 ForEach(items.filter({ $0.category == nil })) { item in
-                    Button("\(item.name!)") { }
+                    Button(action: {
+
+                    }) {
+                        VStack(alignment: .leading) {
+                            if item.name! != item.url! {
+                                Text("\(item.name!)")
+                                Text("\(item.url!)")
+                                    .foregroundColor(.secondary)
+                                    .font(.caption)
+                            } else {
+                                Text("\(item.url!)")
+                            }
+                        }
+                    }
                 }
+                .onDelete { offsets in
+                    let list = items.filter({ $0.category == nil })
+                    deleteSubscriptionItems(offsets: offsets, list: list)
+                }
+
                 Button(action: {
                     callerCategory = Wrapped<SubscriptionCategory?>(nil)
                 }) {
@@ -92,6 +134,11 @@ struct ContentView: View {
                 }
             }
             .toolbar {
+#if os(iOS)
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
+                }
+#endif
                 ToolbarItem {
                     Button(action: {
                         addCategoryIsPresented = true
@@ -155,9 +202,9 @@ struct ContentView: View {
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteSubscriptionItems(offsets: IndexSet, list: [SubscriptionItem]) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { list[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
