@@ -18,6 +18,8 @@
 		FFDCD4342704C28700E02934 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCD41E2704C28600E02934 /* Persistence.swift */; };
 		FFDCD4352704C28700E02934 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFDCD41F2704C28700E02934 /* Assets.xcassets */; };
 		FFDCD4362704C28700E02934 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFDCD41F2704C28700E02934 /* Assets.xcassets */; };
+		FFE078CF27062B6B0057F7AA /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = FFE078CE27062B6B0057F7AA /* SwiftSoup */; };
+		FFE078D227062B920057F7AA /* XMLChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE078D127062B920057F7AA /* XMLChecker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,7 @@
 		FFDCD4242704C28700E02934 /* Feedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Feedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFDCD42A2704C28700E02934 /* Feedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Feedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFDCD42C2704C28700E02934 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		FFE078D127062B920057F7AA /* XMLChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLChecker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFE078CF27062B6B0057F7AA /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +74,7 @@
 		FFDCD4192704C28600E02934 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				FFE078D027062B7B0057F7AA /* XML Handler */,
 				FF4C69C62704EC69009AE4D7 /* Datatype */,
 				FFDCD41C2704C28600E02934 /* FeedexApp.swift */,
 				FFDCD41D2704C28600E02934 /* ContentView.swift */,
@@ -97,6 +102,14 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
+		FFE078D027062B7B0057F7AA /* XML Handler */ = {
+			isa = PBXGroup;
+			children = (
+				FFE078D127062B920057F7AA /* XMLChecker.swift */,
+			);
+			path = "XML Handler";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,6 +126,9 @@
 			dependencies = (
 			);
 			name = "Feedex (iOS)";
+			packageProductDependencies = (
+				FFE078CE27062B6B0057F7AA /* SwiftSoup */,
+			);
 			productName = "Feedex (iOS)";
 			productReference = FFDCD4242704C28700E02934 /* Feedex.app */;
 			productType = "com.apple.product-type.application";
@@ -161,6 +177,9 @@
 				Base,
 			);
 			mainGroup = FFDCD4142704C28500E02934;
+			packageReferences = (
+				FFE078CD27062B6B0057F7AA /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
 			productRefGroup = FFDCD4252704C28700E02934 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -200,6 +219,7 @@
 				FFDCD4332704C28700E02934 /* Persistence.swift in Sources */,
 				FFDCD42D2704C28700E02934 /* Feedex.xcdatamodeld in Sources */,
 				FFDCD4312704C28700E02934 /* ContentView.swift in Sources */,
+				FFE078D227062B920057F7AA /* XMLChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +496,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FFE078CD27062B6B0057F7AA /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FFE078CE27062B6B0057F7AA /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFE078CD27062B6B0057F7AA /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		FFDCD41A2704C28600E02934 /* Feedex.xcdatamodeld */ = {
