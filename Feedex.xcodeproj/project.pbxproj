@@ -10,6 +10,8 @@
 		FF4C69C92704ECA1009AE4D7 /* GenericWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4C69C82704ECA1009AE4D7 /* GenericWrapper.swift */; };
 		FF5A47D827065B8000618F05 /* AddSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A47D727065B8000618F05 /* AddSubscriptionView.swift */; };
 		FF5A47D927065B8000618F05 /* AddSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A47D727065B8000618F05 /* AddSubscriptionView.swift */; };
+		FF5A47DE2706616F00618F05 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A47DD2706616F00618F05 /* AddCategoryView.swift */; };
+		FF5A47DF2706616F00618F05 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A47DD2706616F00618F05 /* AddCategoryView.swift */; };
 		FFDCD42D2704C28700E02934 /* Feedex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFDCD41A2704C28600E02934 /* Feedex.xcdatamodeld */; };
 		FFDCD42E2704C28700E02934 /* Feedex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFDCD41A2704C28600E02934 /* Feedex.xcdatamodeld */; };
 		FFDCD42F2704C28700E02934 /* FeedexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCD41C2704C28600E02934 /* FeedexApp.swift */; };
@@ -27,6 +29,7 @@
 /* Begin PBXFileReference section */
 		FF4C69C82704ECA1009AE4D7 /* GenericWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericWrapper.swift; sourceTree = "<group>"; };
 		FF5A47D727065B8000618F05 /* AddSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubscriptionView.swift; sourceTree = "<group>"; };
+		FF5A47DD2706616F00618F05 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
 		FFDCD41B2704C28600E02934 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		FFDCD41C2704C28600E02934 /* FeedexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedexApp.swift; sourceTree = "<group>"; };
 		FFDCD41D2704C28600E02934 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +73,7 @@
 			children = (
 				FFDCD41D2704C28600E02934 /* ContentView.swift */,
 				FF5A47D727065B8000618F05 /* AddSubscriptionView.swift */,
+				FF5A47DD2706616F00618F05 /* AddCategoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -228,6 +232,7 @@
 			files = (
 				FFDCD42F2704C28700E02934 /* FeedexApp.swift in Sources */,
 				FF4C69C92704ECA1009AE4D7 /* GenericWrapper.swift in Sources */,
+				FF5A47DE2706616F00618F05 /* AddCategoryView.swift in Sources */,
 				FF5A47D827065B8000618F05 /* AddSubscriptionView.swift in Sources */,
 				FFDCD4332704C28700E02934 /* Persistence.swift in Sources */,
 				FFDCD42D2704C28700E02934 /* Feedex.xcdatamodeld in Sources */,
@@ -240,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF5A47DF2706616F00618F05 /* AddCategoryView.swift in Sources */,
 				FFDCD4302704C28700E02934 /* FeedexApp.swift in Sources */,
 				FFDCD4342704C28700E02934 /* Persistence.swift in Sources */,
 				FFDCD42E2704C28700E02934 /* Feedex.xcdatamodeld in Sources */,

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddSubscriptionView: View {
+    // MARK: - Declaration
     @Environment(\.managedObjectContext) private var viewContext
 
     @State var url: String = ""
@@ -16,6 +17,7 @@ struct AddSubscriptionView: View {
 
     @Binding var callerCategory: Wrapped<SubscriptionCategory?>?
 
+    // MARK: - View (Protocol)
     var body: some View {
         NavigationView {
             VStack(spacing: 12) {
@@ -50,9 +52,6 @@ struct AddSubscriptionView: View {
             .navigationTitle("Add Subscription")
             .navigationBarItems(leading: Button("Close") {
                 callerCategory = nil
-                subscribedItemName = ""
-                url = ""
-                nextStep = false
             }, trailing: Button("Add") {
                 addSubscriptionItem(name: subscribedItemName,
                                     url: url,
@@ -65,6 +64,7 @@ struct AddSubscriptionView: View {
         }
     }
 
+    // MARK: - CoreData
     private func addSubscriptionItem(name: String, url: String, category: SubscriptionCategory? = nil) {
         withAnimation {
             let newItem = SubscriptionItem(context: viewContext)
