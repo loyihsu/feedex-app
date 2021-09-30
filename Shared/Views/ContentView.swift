@@ -24,10 +24,6 @@ struct ContentView: View {
     @State var callerCategory: Wrapped<SubscriptionCategory?>? = nil
     @State var addCategoryIsPresented = false
 
-    @State var addUrl: String = ""
-    @State var addItemName: String = ""
-    @State var urlStep2: Bool = false
-
     @State var newCategoryName = ""
 
     var body: some View {
@@ -39,7 +35,6 @@ struct ContentView: View {
                     }
                 }
 
-
                 ForEach(categories) { category in
                     Section(category.name ?? "") {
                         if items.contains(where: { $0.category == category}) {
@@ -50,14 +45,19 @@ struct ContentView: View {
 
                             }) {
                                 VStack(alignment: .leading) {
-                                    if item.name! != item.url! {
-                                        Text("\(item.name!)")
-                                        Text("\(item.url!)")
-                                            .foregroundColor(.secondary)
-                                            .font(.caption)
+                                    if let name = item.name {
+                                        Text("\(name)")
+                                        if name != item.url! {
+                                            Text("\(item.url!)")
+                                                .font(.caption)
+                                                .foregroundColor(.secondary)
+                                        }
                                     } else {
                                         Text("\(item.url!)")
+                                            .font(.caption)
+                                            .foregroundColor((item.name ?? "") != "" ? .secondary : .accentColor)
                                     }
+
                                 }
                             }
                         }
@@ -69,7 +69,7 @@ struct ContentView: View {
                         Button(action: {
                             callerCategory = Wrapped(category.self)
                         }, label: {
-                            Text("Add New Item")
+                            Text("Add Subscription")
                                 .foregroundColor(.secondary)
                         })
                     }
@@ -99,64 +99,19 @@ struct ContentView: View {
                 Button(action: {
                     callerCategory = Wrapped<SubscriptionCategory?>(nil)
                 }) {
-                    Text("Add New item")
+                    Text("Add Subscription")
                         .foregroundColor(.secondary)
                 }
-                .sheet(item: $callerCategory) { wrappedCategory in
-                    NavigationView {
-                        VStack(spacing: 12) {
-                            VStack(alignment: .leading, spacing: 12) {
-                                if urlStep2 {
-                                    TextField("Name", text: $addItemName)
-                                        .foregroundColor(.accentColor)
-                                }
-                                if urlStep2 {
-                                    Text(addUrl).foregroundColor(.secondary)
-                                } else {
-                                    TextField("URL", text: $addUrl)
-                                        .foregroundColor(.secondary)
-                                        .textContentType(.URL)
-                                        .keyboardType(.URL)
-                                }
-                            }
-                            if !urlStep2 {
-                                Button("Search") {
-                                    UIApplication.shared.resignFirstResponder()
-                                    if let document = checkAndFetchXML(addUrl),
-                                       let title = try? document.title() {
-                                        addItemName = title
-                                        urlStep2 = true
-                                    }
-                                }
-                            }
-                            Spacer()
-
-                        }
-                        .padding()
-                        .navigationTitle("Add Subscription")
-                        .navigationBarItems(leading: Button("Close") {
-                            callerCategory = nil
-                            addItemName = ""
-                            addUrl = ""
-                            urlStep2 = false
-                        }, trailing: Button("Add") {
-                            addSubscriptionItem(name: addItemName,
-                                                url: addUrl,
-                                                category: wrappedCategory.item)
-                            urlStep2 = false
-                            callerCategory = nil
-                            addItemName = ""
-                            addUrl = ""
-                        }.disabled(!urlStep2))
-                    }
+                .sheet(item: $callerCategory) { _ in
+                    AddSubscriptionView(callerCategory: $callerCategory)
                 }
             }
             .toolbar {
-#if os(iOS)
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
-#endif
+                #endif
                 ToolbarItem {
                     Button(action: {
                         addCategoryIsPresented = true
@@ -166,7 +121,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Feedex")
-            .sheet(isPresented: $addCategoryIsPresented) {
+            .popover(isPresented: $addCategoryIsPresented) {
                 NavigationView {
                     VStack {
                         TextField("Category Name", text: $newCategoryName)
@@ -186,23 +141,7 @@ struct ContentView: View {
         }
     }
 
-    private func addSubscriptionItem(name: String, url: String, category: SubscriptionCategory? = nil) {
-        withAnimation {
-            let newItem = SubscriptionItem(context: viewContext)
-            newItem.name = name
-            newItem.url = url
-            newItem.category = category
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
+    
 
     private func addCategory(name: String) {
         withAnimation {
