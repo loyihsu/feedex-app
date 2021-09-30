@@ -54,7 +54,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle("Feedex")
+            .navigationBarTitle("Feedex")
         }
     }
 
@@ -73,7 +73,7 @@ struct ContentView: View {
             Section(category.name ?? "") {
                 if items.contains(where: { $0.category == category}) {
                     // Each category will have an 'all feeds' item.
-                    Button("All \(category.name ?? "") Feeds") { }
+                    Button("All in \(category.name ?? "")") { }
                 }
 
                 // This part will display all the subscribed items.
@@ -81,21 +81,7 @@ struct ContentView: View {
                     Button(action: {
 
                     }) {
-                        VStack(alignment: .leading) {
-                            if let name = item.name {
-                                Text("\(name)")
-                                if name != item.url! {
-                                    Text("\(item.url!)")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                }
-                            } else {
-                                Text("\(item.url!)")
-                                    .font(.caption)
-                                    .foregroundColor((item.name ?? "") != "" ? .secondary : .accentColor)
-                            }
-
-                        }
+                        generateSubscriptionItemRepresentation(from: item)
                     }
                 }
                 .onDelete { offsets in
@@ -116,21 +102,16 @@ struct ContentView: View {
 
     private func createUncategoriedSection() -> some View {
         // This part is for the items without a category.
-        Group {
+        Section("Uncategorised") {
+            if items.contains(where: {$0.category == nil}) {
+                Button("All in Uncategorised") { }
+            }
+
             ForEach(items.filter({ $0.category == nil })) { item in
                 Button(action: {
 
                 }) {
-                    VStack(alignment: .leading) {
-                        if item.name! != item.url! {
-                            Text("\(item.name!)")
-                            Text("\(item.url!)")
-                                .foregroundColor(.secondary)
-                                .font(.caption)
-                        } else {
-                            Text("\(item.url!)")
-                        }
-                    }
+                    generateSubscriptionItemRepresentation(from: item)
                 }
             }
             .onDelete { offsets in
@@ -143,6 +124,23 @@ struct ContentView: View {
             }) {
                 Text("Add Subscription")
                     .foregroundColor(.secondary)
+            }
+        }
+    }
+
+    private func generateSubscriptionItemRepresentation(from item: SubscriptionItem) -> some View {
+        VStack(alignment: .leading) {
+            if let name = item.name, name != "" {
+                Text("\(name)")
+                if name != item.url! {
+                    Text("\(item.url!)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            } else {
+                Text("\(item.url!)")
+                    .font((item.name ?? "") != "" ? .caption : .body)
+                    .foregroundColor((item.name ?? "") != "" ? .secondary : .accentColor)
             }
         }
     }
