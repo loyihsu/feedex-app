@@ -104,27 +104,35 @@ struct ContentView: View {
                 }
                 .sheet(item: $callerCategory) { wrappedCategory in
                     NavigationView {
-                        VStack(spacing: 24) {
+                        VStack(spacing: 12) {
+                            if urlStep2 {
+                                TextField("Name", text: $addItemName)
+                                    .foregroundColor(.accentColor)
+                            }
                             TextField("URL", text: $addUrl)
+                                .foregroundColor(.secondary)
+                                .disabled(urlStep2)         //TODO: This is causing runtime issue as it modifies state during view update.
                             if !urlStep2 {
                                 Button("Search") {
                                     if let document = checkAndFetchXML(addUrl),
                                        let title = try? document.title() {
-                                        addItemName = title
-                                        urlStep2 = true
+                                        DispatchQueue.main.async {
+                                            addItemName = title
+                                            urlStep2 = true
+                                        }
                                     }
                                 }
-                                Spacer()
                             }
-                            if urlStep2 {
-                                TextField("Name", text: $addItemName)
-                                Spacer()
-                            }
+                            Spacer()
+
                         }
                         .padding()
                         .navigationTitle("Add Subscription")
                         .navigationBarItems(leading: Button("Close") {
                             callerCategory = nil
+                            addItemName = ""
+                            addUrl = ""
+                            urlStep2 = false
                         }, trailing: Button("Add") {
                             addSubscriptionItem(name: addItemName,
                                                 url: addUrl,
