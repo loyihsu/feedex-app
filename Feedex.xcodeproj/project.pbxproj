@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		FF4C69C92704ECA1009AE4D7 /* GenericWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4C69C82704ECA1009AE4D7 /* GenericWrapper.swift */; };
+		FF5A47D827065B8000618F05 /* AddSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A47D727065B8000618F05 /* AddSubscriptionView.swift */; };
+		FF5A47D927065B8000618F05 /* AddSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A47D727065B8000618F05 /* AddSubscriptionView.swift */; };
+		FF5A47DE2706616F00618F05 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A47DD2706616F00618F05 /* AddCategoryView.swift */; };
+		FF5A47DF2706616F00618F05 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A47DD2706616F00618F05 /* AddCategoryView.swift */; };
 		FFDCD42D2704C28700E02934 /* Feedex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFDCD41A2704C28600E02934 /* Feedex.xcdatamodeld */; };
 		FFDCD42E2704C28700E02934 /* Feedex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFDCD41A2704C28600E02934 /* Feedex.xcdatamodeld */; };
 		FFDCD42F2704C28700E02934 /* FeedexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDCD41C2704C28600E02934 /* FeedexApp.swift */; };
@@ -24,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		FF4C69C82704ECA1009AE4D7 /* GenericWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericWrapper.swift; sourceTree = "<group>"; };
+		FF5A47D727065B8000618F05 /* AddSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubscriptionView.swift; sourceTree = "<group>"; };
+		FF5A47DD2706616F00618F05 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
 		FFDCD41B2704C28600E02934 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		FFDCD41C2704C28600E02934 /* FeedexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedexApp.swift; sourceTree = "<group>"; };
 		FFDCD41D2704C28600E02934 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +68,26 @@
 			path = Datatype;
 			sourceTree = "<group>";
 		};
+		FF5A47D627065B7300618F05 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FFDCD41D2704C28600E02934 /* ContentView.swift */,
+				FF5A47D727065B8000618F05 /* AddSubscriptionView.swift */,
+				FF5A47DD2706616F00618F05 /* AddCategoryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FF5A47E0270665B800618F05 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FFDCD41A2704C28600E02934 /* Feedex.xcdatamodeld */,
+				FFDCD41E2704C28600E02934 /* Persistence.swift */,
+				FFE078D027062B7B0057F7AA /* XML Handler */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		FFDCD4142704C28500E02934 = {
 			isa = PBXGroup;
 			children = (
@@ -74,13 +100,11 @@
 		FFDCD4192704C28600E02934 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				FFE078D027062B7B0057F7AA /* XML Handler */,
-				FF4C69C62704EC69009AE4D7 /* Datatype */,
 				FFDCD41C2704C28600E02934 /* FeedexApp.swift */,
-				FFDCD41D2704C28600E02934 /* ContentView.swift */,
-				FFDCD41E2704C28600E02934 /* Persistence.swift */,
 				FFDCD41F2704C28700E02934 /* Assets.xcassets */,
-				FFDCD41A2704C28600E02934 /* Feedex.xcdatamodeld */,
+				FF5A47E0270665B800618F05 /* Model */,
+				FF5A47D627065B7300618F05 /* Views */,
+				FF4C69C62704EC69009AE4D7 /* Datatype */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -216,6 +240,8 @@
 			files = (
 				FFDCD42F2704C28700E02934 /* FeedexApp.swift in Sources */,
 				FF4C69C92704ECA1009AE4D7 /* GenericWrapper.swift in Sources */,
+				FF5A47DE2706616F00618F05 /* AddCategoryView.swift in Sources */,
+				FF5A47D827065B8000618F05 /* AddSubscriptionView.swift in Sources */,
 				FFDCD4332704C28700E02934 /* Persistence.swift in Sources */,
 				FFDCD42D2704C28700E02934 /* Feedex.xcdatamodeld in Sources */,
 				FFDCD4312704C28700E02934 /* ContentView.swift in Sources */,
@@ -227,9 +253,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF5A47DF2706616F00618F05 /* AddCategoryView.swift in Sources */,
 				FFDCD4302704C28700E02934 /* FeedexApp.swift in Sources */,
 				FFDCD4342704C28700E02934 /* Persistence.swift in Sources */,
 				FFDCD42E2704C28700E02934 /* Feedex.xcdatamodeld in Sources */,
+				FF5A47D927065B8000618F05 /* AddSubscriptionView.swift in Sources */,
 				FFDCD4322704C28700E02934 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
