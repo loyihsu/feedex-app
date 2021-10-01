@@ -35,7 +35,12 @@ struct ContentView: View {
             List {
                 Section {
                     Button("All Items") {
-
+                        let result = items
+                            .flatMap({ fetchXMLContents($0.url!, source: $0.name ?? "")})
+                            .sorted(by: { $0.date > $1.date })
+                        result.forEach {
+                            print("\($0.title): \($0.date) - \($0.sourceName)")
+                        }
                     }
                 }
 
@@ -43,11 +48,19 @@ struct ContentView: View {
                 ForEach(categories) { category in
                     Section(category.name ?? "") {
                         if items.contains(where: { $0.category == category}) {
-                            Button("All items") { }
+                            Button("All items") {
+                                let allItems = items.filter({ $0.category == category })
+                                let result = allItems
+                                    .flatMap({ fetchXMLContents($0.url!, source: $0.name ?? "")})
+                                    .sorted(by: { $0.date > $1.date })
+                                result.forEach {
+                                    print("\($0.title): \($0.date) - \($0.sourceName)")
+                                }
+                            }
                         }
                         ForEach(items.filter({ $0.category == category })) { item in
                             Button(action: {
-
+                                print(fetchXMLContents(item.url!, source: item.name ?? ""))
                             }) {
                                 VStack(alignment: .leading) {
                                     if item.name! != item.url! {
@@ -77,7 +90,7 @@ struct ContentView: View {
 
                 ForEach(items.filter({ $0.category == nil })) { item in
                     Button(action: {
-
+                        print(fetchXMLContents(item.url!, source: item.name ?? ""))
                     }) {
                         VStack(alignment: .leading) {
                             if item.name! != item.url! {
