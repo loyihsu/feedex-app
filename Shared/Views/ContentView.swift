@@ -41,11 +41,11 @@ struct ContentView: View {
                 AddSubscriptionView(callerCategory: $callerCategory)
             }
             .toolbar {
-                #if os(iOS)
+#if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
-                #endif
+#endif
                 ToolbarItem {
                     Button(action: {
                         addCategoryIsPresented = true
@@ -63,7 +63,14 @@ struct ContentView: View {
     private func createAllFeedsSection() -> some View {
         Section {
             // This section is for feed from all the subscribed channels.
-            Button("All Feeds") { }
+            Button("All Feeds") {
+                let result = items
+                    .flatMap({ fetchXMLContents($0.url!, source: $0.name ?? "")})
+                    .sorted(by: { $0.date > $1.date })
+                result.forEach {
+                    print("\($0.title): \($0.date) - \($0.sourceName)")
+                }
+            }
         }
     }
 
@@ -73,13 +80,21 @@ struct ContentView: View {
             Section(category.name ?? "") {
                 if items.contains(where: { $0.category == category}) {
                     // Each category will have an 'all feeds' item.
-                    Button("All in \(category.name ?? "")") { }
+                    Button("All in \(category.name ?? "")") {
+                        let allItems = items.filter({ $0.category == category })
+                        let result = allItems
+                            .flatMap({ fetchXMLContents($0.url!, source: $0.name ?? "")})
+                            .sorted(by: { $0.date > $1.date })
+                        result.forEach {
+                            print("\($0.title): \($0.date) - \($0.sourceName)")
+                        }
+                    }
                 }
 
                 // This part will display all the subscribed items.
                 ForEach(items.filter({ $0.category == category })) { item in
                     Button(action: {
-
+                        print(fetchXMLContents(item.url!, source: item.name ?? ""))
                     }) {
                         generateSubscriptionItemRepresentation(from: item)
                     }
@@ -104,12 +119,20 @@ struct ContentView: View {
         // This part is for the items without a category.
         Section("Uncategorised") {
             if items.contains(where: {$0.category == nil}) {
-                Button("All in Uncategorised") { }
+                Button("All in Uncategorised") {
+                    let allItems = items.filter({ $0.category == nil })
+                    let result = allItems
+                        .flatMap({ fetchXMLContents($0.url!, source: $0.name ?? "")})
+                        .sorted(by: { $0.date > $1.date })
+                    result.forEach {
+                        print("\($0.title): \($0.date) - \($0.sourceName)")
+                    }
+                }
             }
 
             ForEach(items.filter({ $0.category == nil })) { item in
                 Button(action: {
-
+                    print(fetchXMLContents(item.url!, source: item.name ?? ""))
                 }) {
                     generateSubscriptionItemRepresentation(from: item)
                 }
