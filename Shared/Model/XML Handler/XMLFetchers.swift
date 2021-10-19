@@ -10,16 +10,6 @@ import SwiftSoup
 
 let dateFormatter = DateFormatter()
 
-struct RssRepresentation: Identifiable {
-    let id = UUID()
-    let title: String
-    let link: String
-    let date: Date
-    let content: String
-
-    let sourceName: String
-}
-
 func checkAndFetchXML(_ url: String) -> Document? {
     guard let url = URL(string: url) else { return nil }
     guard let content = try? String(contentsOf: url) else { return nil }

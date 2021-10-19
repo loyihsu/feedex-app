@@ -8,22 +8,41 @@
 import SwiftUI
 
 struct FeedList: View {
-    var contents: [RssRepresentation]
+    @ObservedObject var contents = RssList()
 
     var body: some View {
-        List(contents) { item in
-            VStack (alignment: .leading, spacing: 4) {
-                Text(item.title)
-                    .bold()
-                HStack (spacing: 5) {
-                    Text(item.sourceName)
-                    Text("·")
-                    Text(item.date, format: .dateTime)
+        List(contents.list) { item in
+            Button(action: {
+                contents.list[contents.list.firstIndex(of: item)!].read = true
+                print(item.read)
+                print(contents.list[contents.list.firstIndex(of: item)!].read)
+            }) {
+                VStack (alignment: .leading, spacing: 4) {
+                    HStack {
+                        Circle()
+                            .frame(width: 10, height: 10)
+                            .foregroundColor(.blue)
+                            .opacity(0.75)
+                        if item.read == false {
+                            Text(item.title)
+                                .bold()
+                                .foregroundColor(Color(.label))
+                        }
+                    }
+                    HStack (spacing: 5) {
+                        Circle()
+                            .frame(width: 10, height: 10)
+                            .opacity(0)
+                        Text(item.sourceName)
+                        Text("·")
+                        Text(item.date, format: .dateTime)
+                    }
+                    .font(.caption)
+                    .foregroundColor(.secondary)
                 }
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .padding(6)
             }
-            .padding(6)
+
         }
     }
 }
@@ -38,6 +57,6 @@ struct FeedList_Previews: PreviewProvider {
             .init(title: "Some title", link: "https://www.facebook.com", date: Date(), content: "The content goes here.", sourceName: "Facebook")
         ]
 
-        FeedList(contents: contents)
+        FeedList(contents: RssList(list: contents))
     }
 }

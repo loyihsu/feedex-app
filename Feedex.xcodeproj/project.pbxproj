@@ -26,6 +26,7 @@
 		FFDCD4362704C28700E02934 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFDCD41F2704C28700E02934 /* Assets.xcassets */; };
 		FFE078CF27062B6B0057F7AA /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = FFE078CE27062B6B0057F7AA /* SwiftSoup */; };
 		FFE078D227062B920057F7AA /* XMLFetchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE078D127062B920057F7AA /* XMLFetchers.swift */; };
+		FFE2BE87271F6966007CCB76 /* RssRepresentations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE2BE86271F6966007CCB76 /* RssRepresentations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		FFDCD42A2704C28700E02934 /* Feedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Feedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFDCD42C2704C28700E02934 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		FFE078D127062B920057F7AA /* XMLFetchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLFetchers.swift; sourceTree = "<group>"; };
+		FFE2BE86271F6966007CCB76 /* RssRepresentations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssRepresentations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				FFE078D127062B920057F7AA /* XMLFetchers.swift */,
+				FFE2BE86271F6966007CCB76 /* RssRepresentations.swift */,
 			);
 			path = "XML Handler";
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				FF5A47DE2706616F00618F05 /* AddCategoryView.swift in Sources */,
 				FF5A47D827065B8000618F05 /* AddSubscriptionView.swift in Sources */,
 				FF5E4D1D2708D0C1001FEF11 /* FeedList.swift in Sources */,
+				FFE2BE87271F6966007CCB76 /* RssRepresentations.swift in Sources */,
 				FFDCD4332704C28700E02934 /* Persistence.swift in Sources */,
 				FFDCD42D2704C28700E02934 /* Feedex.xcdatamodeld in Sources */,
 				FFDCD4312704C28700E02934 /* ContentView.swift in Sources */,

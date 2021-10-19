@@ -12,6 +12,6 @@
     </entity>
     <elements>
         <element name="SubscriptionCategory" positionX="-429.45166015625" positionY="-48.1893310546875" width="128" height="74"/>
-        <element name="SubscriptionItem" positionX="-433.5150146484375" positionY="70.1429443359375" width="128" height="88"/>
+        <element name="SubscriptionItem" positionX="-433.5150146484375" positionY="70.1429443359375" width="128" height="74"/>
     </elements>
 </model>

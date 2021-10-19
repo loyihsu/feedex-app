@@ -32,7 +32,6 @@ struct ContentView: View {
                 createAllFeedsSection()
                 createAllCategorySections()
                 createUncategoriedSection()
-
             }
             .popover(isPresented: $addCategoryIsPresented) {
                 AddCategoryView(addCategoryIsPresented: $addCategoryIsPresented)
@@ -67,7 +66,7 @@ struct ContentView: View {
                 let result = items
                     .flatMap({ fetchXMLContents($0.url!, source: $0.name ?? "")})
                     .sorted(by: { $0.date > $1.date })
-                FeedList(contents: result)
+                FeedList(contents: RssList(list: result))
                     .navigationBarTitle("All Feeds")
             }
                 .foregroundColor(.accentColor)
@@ -85,7 +84,7 @@ struct ContentView: View {
                             .filter({ $0.category == category })
                             .flatMap({ fetchXMLContents($0.url!, source: $0.name ?? "")})
                             .sorted(by: { $0.date > $1.date })
-                        FeedList(contents: result)
+                        FeedList(contents: RssList(list: result))
                             .navigationBarTitle("All in \(category.name ?? "")")
                     }
                     .foregroundColor(.accentColor)
@@ -95,7 +94,7 @@ struct ContentView: View {
                 ForEach(items.filter({ $0.category == category })) { item in
                     NavigationLink(destination: {
                         let result = fetchXMLContents(item.url!, source: item.name ?? "")
-                        FeedList(contents: result)
+                        FeedList(contents: RssList(list: result))
                             .navigationBarTitle("\(item.name ?? "")")
                     }) {
                         generateSubscriptionItemRepresentation(from: item)
@@ -127,7 +126,7 @@ struct ContentView: View {
                         .filter({ $0.category == nil })
                         .flatMap({ fetchXMLContents($0.url!, source: $0.name ?? "")})
                         .sorted(by: { $0.date > $1.date })
-                    FeedList(contents: result)
+                    FeedList(contents: RssList(list: result))
                         .navigationBarTitle("All in Uncategorised")
                 }
                 .foregroundColor(.accentColor)
@@ -136,7 +135,7 @@ struct ContentView: View {
             ForEach(items.filter({ $0.category == nil })) { item in
                 NavigationLink(destination: {
                     let result = fetchXMLContents(item.url!, source: item.name ?? "")
-                    FeedList(contents: result)
+                    FeedList(contents: RssList(list: result))
                         .navigationBarTitle("\(item.name ?? "")")
                 }) {
                     generateSubscriptionItemRepresentation(from: item)
