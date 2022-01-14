@@ -7,8 +7,6 @@
 
 import Foundation
 
-#warning("Temp RSS representations for testing. This should be in the Core Data models.")
-
 class RssList: ObservableObject {
     @Published var list: [RssRepresentation] = []
 

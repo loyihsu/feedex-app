@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="SubscriptionCategory" representedClassName="SubscriptionCategory" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SubscriptionItem" inverseName="category" inverseEntity="SubscriptionItem"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Website" inverseName="category" inverseEntity="Website"/>
     </entity>
-    <entity name="SubscriptionItem" representedClassName="SubscriptionItem" syncable="YES" codeGenerationType="class">
+    <entity name="RssItem" representedClassName="RssItem" syncable="YES" codeGenerationType="class">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="id" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Website" inverseName="items" inverseEntity="Website"/>
+    </entity>
+    <entity name="Website" representedClassName="Website" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubscriptionCategory" inverseName="items" inverseEntity="SubscriptionCategory"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="items" inverseEntity="Category"/>
+        <relationship name="items" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RssItem" inverseName="id" inverseEntity="RssItem"/>
     </entity>
     <elements>
-        <element name="SubscriptionCategory" positionX="-429.45166015625" positionY="-48.1893310546875" width="128" height="74"/>
-        <element name="SubscriptionItem" positionX="-433.5150146484375" positionY="70.1429443359375" width="128" height="74"/>
+        <element name="Category" positionX="-429.45166015625" positionY="-48.1893310546875" width="128" height="74"/>
+        <element name="Website" positionX="-433.5150146484375" positionY="70.1429443359375" width="128" height="104"/>
+        <element name="RssItem" positionX="-441" positionY="36" width="128" height="89"/>
     </elements>
 </model>

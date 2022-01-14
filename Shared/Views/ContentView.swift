@@ -13,16 +13,16 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \SubscriptionCategory.date, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Category.date, ascending: true)],
         animation: .default)
-    private var categories: FetchedResults<SubscriptionCategory>
+    private var categories: FetchedResults<Category>
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \SubscriptionItem.name, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Website.name, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<SubscriptionItem>
+    private var items: FetchedResults<Website>
 
-    @State var callerCategory: Wrapped<SubscriptionCategory?>? = nil
+    @State var callerCategory: Wrapped<Category?>? = nil
     @State var addCategoryIsPresented = false
 
     // MARK: - View (Protocol)
@@ -148,7 +148,7 @@ struct ContentView: View {
             }
 
             Button(action: {
-                callerCategory = Wrapped<SubscriptionCategory?>(nil)
+                callerCategory = Wrapped<Category?>(nil)
             }) {
                 Text("Add Subscription")
                     .foregroundColor(.secondary)
@@ -156,7 +156,7 @@ struct ContentView: View {
         }
     }
 
-    private func generateSubscriptionItemRepresentation(from item: SubscriptionItem) -> some View {
+    private func generateSubscriptionItemRepresentation(from item: Website) -> some View {
         VStack(alignment: .leading) {
             if let name = item.name, name != "" {
                 Text("\(name)")
@@ -174,7 +174,7 @@ struct ContentView: View {
     }
 
     // MARK: - CoreData
-    private func deleteSubscriptionItems(offsets: IndexSet, from list: [SubscriptionItem]) {
+    private func deleteSubscriptionItems(offsets: IndexSet, from list: [Website]) {
         withAnimation {
             offsets.map { list[$0] }.forEach(viewContext.delete)
 

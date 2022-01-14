@@ -15,7 +15,7 @@ struct AddSubscriptionView: View {
     @State var subscribedItemName: String = ""
     @State var nextStep: Bool = false
 
-    @Binding var callerCategory: Wrapped<SubscriptionCategory?>?
+    @Binding var callerCategory: Wrapped<Category?>?
 
     // MARK: - View (Protocol)
     var body: some View {
@@ -65,9 +65,9 @@ struct AddSubscriptionView: View {
     }
 
     // MARK: - CoreData
-    private func addSubscriptionItem(name: String, url: String, category: SubscriptionCategory? = nil) {
+    private func addSubscriptionItem(name: String, url: String, category: Category? = nil) {
         withAnimation {
-            let newItem = SubscriptionItem(context: viewContext)
+            let newItem = Website(context: viewContext)
             newItem.name = name
             newItem.url = url
             newItem.category = category

@@ -13,21 +13,21 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        var categories = [SubscriptionCategory]()
+        var categories = [Category]()
 
         for idx in 1...2 {
-            let newCategory = SubscriptionCategory(context: viewContext)
+            let newCategory = Category(context: viewContext)
             newCategory.name = "Sample Category \(idx)"
             categories.append(newCategory)
         }
 
         for category in categories {
-            let item1 = SubscriptionItem(context: viewContext)
+            let item1 = Website(context: viewContext)
             item1.name = "Google"
             item1.url = "https://www.google.com"
             item1.category = category
 
-            let item2 = SubscriptionItem(context: viewContext)
+            let item2 = Website(context: viewContext)
             item2.name = "Facebook"
             item2.url = "https://www.facebook.com"
             item2.category = category

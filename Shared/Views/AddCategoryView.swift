@@ -40,7 +40,7 @@ struct AddCategoryView: View {
     // MARK: - CoreData
     private func addCategory(name: String) {
         withAnimation {
-            let newItem = SubscriptionCategory(context: viewContext)
+            let newItem = Category(context: viewContext)
             newItem.name = name
             newItem.date = Date()
 
